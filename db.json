@@ -423,6 +423,22 @@
         }
       ],
       "id": 5
+    },
+    {
+      "name": "Higor",
+      "email": "higo@teste.com",
+      "emailConfirmation": "higo@teste.com",
+      "address": "Rua pontes",
+      "number": "123",
+      "optionalAddress": "",
+      "paymentOption": "MON",
+      "orderItems": [
+        {
+          "quantity": 1,
+          "menuId": "sunday"
+        }
+      ],
+      "id": 6
     }
   ]
 }
