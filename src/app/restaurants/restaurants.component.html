@@ -25,6 +25,11 @@
               <mt-restaurant [restaurant]="restaurant"></mt-restaurant>
             <!-- /.info-box -->
           </div>
+          <div class="col-xs-12" *ngIf="restaurants?.length === 0">
+            <p class="lead text-center">
+              Não foram encontrados itens para a sua busca.
+            </p>
+          </div>
           <!-- /.col -->
         </div>
 
