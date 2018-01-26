@@ -5,6 +5,7 @@ import {CartItem} from '../restaurant-detail/shopping-cart/cart-item.model'
 import {Order, OrderItem} from './order.model'
 import {Router} from '@angular/router'
 import {FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms'
+import 'rxjs/add/operator/do'
 
 @Component({
   selector: 'mt-order',
@@ -24,6 +25,8 @@ export class OrderComponent implements OnInit {
     {label: 'Cartão de Débito', value: 'DEB'},
     {label: 'Cartão Refeição', value: 'REF'},
   ]
+
+  orderId: string
 
   constructor(private orderService: OrderService,
               private router: Router,
@@ -73,14 +76,21 @@ export class OrderComponent implements OnInit {
   remove(item: CartItem){
     this.orderService.remove(item)
   }
+
+  isOrderCompleted():boolean{
+    return this.orderId !== undefined
+
+  }
   checkOrder(order: Order){
     order.orderItems = this.cartItems()
     .map((item:CartItem)=> new OrderItem(item.quantity, item.menuItem.id))
     this.orderService.checkOrder(order)
+    .do((orderId: string)=> {
+      this.orderId = orderId
+    })
     .subscribe((orderId: string) => {
       this.router.navigate(['/order-summary'])
       this.orderService.clear()
     })
-    console.log(order)
   }
 }
